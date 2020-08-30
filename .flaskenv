@@ -1,0 +1,2 @@
+FLASK_APP=IED
+FLASK_ENV=development
