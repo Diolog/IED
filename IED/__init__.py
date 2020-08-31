@@ -12,6 +12,7 @@ from IED.models.resources import *
 from IED.models.user import *
 from IED.models.log import *
 
+
 def create_app(config_name=None):
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
