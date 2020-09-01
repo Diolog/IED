@@ -8,7 +8,7 @@ from IED.extensions import db
 from IED.models.resources import ResourceClass,Resource
 from IED.utils.PKGenrate import generate_resource_key
 from IED.apis.v1.errors import api_abort
-
+from IED.apis.v1.apiException import ParameterException
 
 class IndexAPI(MethodView):
 
@@ -20,6 +20,7 @@ class IndexAPI(MethodView):
 class ItemsAPI(MethodView):
 
     def get(self):
+        """get the list of Resources. in pages"""
         pass
 
     def post(self):
@@ -31,20 +32,22 @@ class ItemsAPI(MethodView):
         resource_id = generate_resource_key()
 
         real_url = None
-        if file is not None:
+        if file:
             real_url_directory = os.path.join(os.getcwd(), 'media', 'resource')
 
             if not os.path.exists(real_url_directory):
                 os.makedirs(real_url_directory)
 
-            real_url = os.path.join(real_url_directory, resource_id + '.' + file.filename.split('.')[-1])
+            save_name = resource_id + ('.' + file.filename.split('.')[-1]) if len(file.filename.split('.')) > 1 else ''
+            real_url = os.path.join(real_url_directory, save_name)
             file.save(real_url)
         else:
-            return api_abort(code=400, message="Miss parameter.")
+            raise ParameterException()
 
-        item = Resource(id=resource_id, name=file.filename if name is None else name, real_url=real_url,)
+        item = Resource(id=resource_id, name=file.filename if name is None else name, real_url=real_url, resource_url= '/media/resource/'+ save_name)
         
-
+        db.session.add(item)
+        db.session.commit()
 
         response =jsonify({
             'access': True

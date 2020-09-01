@@ -1,5 +1,4 @@
 from IED.extensions import db
-
 from IED.models.base import Base
 from IED.utils.PKGenrate import generate_resource_key
 
