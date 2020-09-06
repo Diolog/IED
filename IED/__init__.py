@@ -40,7 +40,6 @@ def register_blueprints(app):
 def register_error(app):
     @app.errorhandler(Exception)
     def exception_solve(e):
-        print(app.config['DEBUG'])
         if isinstance(e, APIException):
             return e
         if isinstance(e, HTTPException):
@@ -52,9 +51,9 @@ def register_error(app):
         else:
             # 如果是调试模式,则返回e的具体异常信息。否则返回json格式的ServerException对象！
             # 针对于异常信息，我们最好用日志的方式记录下来。
+            import traceback
+            traceback.print_exc()
             if app.config["DEBUG"]:
-                import traceback
-                traceback.print_exc()
                 return e
             else:
                 return ServerError()
