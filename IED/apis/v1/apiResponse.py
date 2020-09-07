@@ -7,7 +7,7 @@ class JsonResponse():
 
     code = 200
     msg = "request success"
-    solve_code = 20001
+    solve_code = 2000
     data = ''
 
     def __init__(self, msg=None, code=None, solve_code=None, data=None):

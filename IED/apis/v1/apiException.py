@@ -45,13 +45,11 @@ class APIException(HTTPException):
         return main_path[0]
 
 
-
-
 class ServerError(APIException):
     code = 500
     msg = "server is invallid"
     error_code = 999
-    data = ''
+    data = '服务器错误'
 
 
 class ClientTypeError(APIException):
@@ -65,7 +63,7 @@ class ParameterException(APIException):
     code = 400
     msg = 'invalid parameter'
     error_code = 1000
-    data = ''
+    data = '参数错误'
 
 
 class AuthFailed(APIException):
@@ -80,3 +78,10 @@ class ValError(APIException):
     msg = 'invalid parameter'
     error_code = 1001
     data = ''
+
+
+class FileExistedError(APIException):
+    code = 406
+    msg = 'existed file'
+    error_code = 4006
+    data = '文件已存在，无法再次上传'

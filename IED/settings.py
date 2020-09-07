@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -14,7 +15,7 @@ class BaseConfig:
 
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'mysql://root:root@127.0.0.1/IED')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
+    SEND_FILE_MAX_AGE_DEFAULT = timedelta(seconds=1)
 
 class DevelopmentConfig(BaseConfig):
     pass
