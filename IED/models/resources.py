@@ -17,3 +17,5 @@ class Resource(Base):
     resource_url = db.Column(db.String(255), nullable=False)
     class_id = db.Column(db.Integer, nullable=False)
     file_md5 = db.Column(db.String(35), nullable=False, unique=True)
+    description = db.Column(db.String(255), default='')
+    size = db.Column(db.Float, nullable=False)

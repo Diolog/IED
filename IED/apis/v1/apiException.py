@@ -73,11 +73,11 @@ class AuthFailed(APIException):
     data = ''
 
 
-class ValError(APIException):
+class ObjectNotFound(APIException):
     code = 404
-    msg = 'invalid parameter'
-    error_code = 1001
-    data = ''
+    msg = 'not found'
+    error_code = 4001
+    data = '没有找到您需要的东西'
 
 
 class FileExistedError(APIException):
